@@ -1,0 +1,22 @@
+##Packages for pacman
+
+##Base System
+base-devel
+git
+
+##Terminal-Tools
+fish
+github-cli
+bash-completion
+fastfetch
+sixel
+
+## Leangueges
+node
+vue
+
+## Dev Tools
+
+
+## IA
+opencode
