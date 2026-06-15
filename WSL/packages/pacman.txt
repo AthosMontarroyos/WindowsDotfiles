@@ -3,7 +3,6 @@ base-devel
 git
 
 # SHELL / TERMINAL
-fish
 bash-completion
 
 # CLI TOOLS
@@ -12,9 +11,7 @@ ncdu
 dust
 duf
 tree
-fastfetch
 eza
-starship
 curl
 wget
 jq
@@ -49,6 +46,9 @@ python
 python-pip
 uv
 clang
+
+#IA
+opencode
 
 # FONTES (opcional, só se usar terminal com rendering de fonte)
 ttf-jetbrains-mono-nerd
