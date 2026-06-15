@@ -24,13 +24,13 @@ enable_services() {
 
     if command -v psql &>/dev/null; then
         log "Inicializando PostgreSQL..."
-        if [[ ! -d /var/lib/postgres/data ]]; then
+        if ! sudo -u postgres test -e /var/lib/postgres/data/PG_VERSION; then
             sudo -u postgres initdb -D /var/lib/postgres/data
         else
             warn "PostgreSQL ja inicializado — pulando initdb."
         fi
-        sudo systemctl enable --now postgresql
-        log "PostgreSQL habilitado."
+            sudo systemctl enable --now postgresql
+            log "PostgreSQL habilitado."
     else
         warn "PostgreSQL nao encontrado — pulando."
     fi

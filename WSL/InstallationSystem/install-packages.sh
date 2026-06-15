@@ -20,11 +20,18 @@ install_official_packages() {
         return
     fi
 
+    sed -i 's/\r//' "$pkg_file"
+
+    log "Inicializando keyring..."
+    sudo pacman-key --init
+    sudo pacman-key --populate archlinux
+    sudo pacman -Sy --noconfirm archlinux-keyring
+
     log "Atualizando sistema..."
     sudo pacman -Syu --noconfirm
 
     log "Instalando pacotes oficiais..."
-    grep -v '^\s*#' "$pkg_file" | grep -v '^\s*$' | \
+    grep -v '^\s*#' "$pkg_file" | grep -v '^\s*$' | sed 's/#.*//' | tr -d ' \t' | grep -v '^\s*$' | \
         sudo pacman -S --needed --noconfirm -
 }
 
@@ -36,12 +43,14 @@ install_aur_packages() {
         return
     fi
 
+    sed -i 's/\r//' "$aur_file"
+
     if ! command -v yay &>/dev/null; then
         err "yay nao encontrado. Execute setup-initial.sh primeiro."
     fi
 
     log "Instalando pacotes AUR..."
-    grep -v '^\s*#' "$aur_file" | grep -v '^\s*$' | \
+    grep -v '^\s*#' "$aur_file" | grep -v '^\s*$' | sed 's/#.*//' | tr -d ' \t' | grep -v '^\s*$' | \
         xargs yay -S --needed --noconfirm
 }
 

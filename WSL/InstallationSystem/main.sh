@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Corrige CRLF em todos os scripts antes de qualquer execucao
+sed -i 's/\r//' "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"/../lib/utils.sh
+find "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" -name "*.sh" -exec sed -i 's/\r//' {} +
+
+# ... resto do script
 # ============================================================
 #  INSTALL MODULE — orquestrador principal
 #  Pode ser sourced ou executado diretamente
@@ -30,7 +35,7 @@ run_install_module() {
 
     # 3.
     apply_dots
-    
+
     # 4. Servicos
     enable_services
 

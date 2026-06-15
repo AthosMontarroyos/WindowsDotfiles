@@ -6,7 +6,7 @@
 # ============================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     set -euo pipefail
@@ -44,6 +44,15 @@ EOF
 # GIT CONFIG
 # ----------------------------------------------------------
 apply_git_config() {
+    local current_name current_email
+    current_name="$(git config --global user.name 2>/dev/null)"
+    current_email="$(git config --global user.email 2>/dev/null)"
+
+    if [[ -n "$current_name" && -n "$current_email" ]]; then
+        warn "Git ja configurado ($current_name / $current_email) — pulando."
+        return
+    fi
+
     log "Configurando Git..."
 
     read -rp "  Nome para git config (ex: Athos Montarroyos): " GIT_NAME
@@ -80,6 +89,7 @@ apply_gh_auth() {
 # ----------------------------------------------------------
 apply_personal_dots() {
     local src_base="$DOTFILES_DIR/Dots/home/user"
+    log "Procurando dots em: $src_base"
 
     if [[ ! -d "$src_base" ]]; then
         warn "Dots/home/user nao encontrado — pulando configs pessoais."
@@ -96,7 +106,24 @@ apply_personal_dots() {
         fi
     done
 
+    if [[ -f "$src_base/.bashrc" ]]; then
+        log "Copiando .bashrc..."
+        cp -f "$src_base/.bashrc" "$HOME/.bashrc"
+    fi  
+    
     log "Configs pessoais aplicadas."
+}
+
+apply_npmrc() {
+    if [[ -f "$HOME/.npmrc" ]]; then
+        warn ".npmrc ja existe — pulando."
+        return
+    fi
+
+    log "Configurando .npmrc..."
+    echo "prefix=$HOME/.npm-global" > "$HOME/.npmrc"
+    mkdir -p "$HOME/.npm-global/bin"
+    log ".npmrc configurado."
 }
 
 # ----------------------------------------------------------
@@ -107,6 +134,7 @@ apply_dots() {
     apply_git_config
     apply_gh_auth
     apply_personal_dots
+    apply_npmrc
 }
 
 # Standalone execution
