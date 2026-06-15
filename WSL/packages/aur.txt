@@ -1,1 +1,5 @@
-## Packages From yay
+# FONTS
+ttf-ms-fonts  # compatibilidade de rendering no terminal
+
+# DOCKER
+nvidia-container-toolkit  # só se for usar GPU dentro de containers no WSL2 (requer nvidia driver com suporte WSL)

@@ -1,22 +1,55 @@
-##Packages for pacman
-
-##Base System
+# BASE
 base-devel
 git
 
-##Terminal-Tools
+# SHELL / TERMINAL
 fish
-github-cli
 bash-completion
+
+# CLI TOOLS
+btop
+ncdu
+dust
+duf
+tree
 fastfetch
-sixel
+eza
+starship
+curl
+wget
+jq
+rsync
+bc
+ripgrep
+go-yq
+unzip
+zip
+p7zip
 
-## Leangueges
-node
-vue
+# DESENVOLVIMENTO
+nano
+neovim
+cmake
+ninja
+github-cli
+git-lfs
+git-filter-repo
+gitleaks
+nodejs
+npm
+pnpm
+dotnet-sdk
+docker
+docker-compose
+lazydocker
+postgresql
 
-## Dev Tools
+# PYTHON
+python
+python-pip
+uv
+clang
 
-
-## IA
-opencode
+# FONTES (opcional, só se usar terminal com rendering de fonte)
+ttf-jetbrains-mono-nerd
+ttf-nerd-fonts-symbols

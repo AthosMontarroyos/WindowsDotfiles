@@ -613,7 +613,6 @@ $scripts = @(
 			'Obsidian.Obsidian';
 			'Vencord.Vesktop';
 			'Canva.Affinity';
-			'Canva.Canva';
 			'Anthropic.Claude';
 			'Valve.Steam';
 			'Mojang.MinecraftLauncher';
@@ -624,7 +623,12 @@ $scripts = @(
 			'RARLAB.WinRAR';
 			'9WZDNCRFJ3PS';
 			'Google.GoogleDrive';
-			'OPAutoClicker.OPAutoClicker';
+            'ente-io.auth-desktop';
+            'ente-io.photos-desktop';
+            'Bitwarden.Bitwarden';
+            'Mozilla.Thunderbird';
+            'Microsoft.PowerToys';
+			'Docker.DockerDesktop';
 		);
 		foreach( $app in $apps ) {
 			winget install --id $app --silent --accept-package-agreements --accept-source-agreements;
