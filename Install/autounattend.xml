@@ -629,7 +629,8 @@ $scripts = @(
             'Mozilla.Thunderbird';
             'Microsoft.PowerToys';
 			'Docker.DockerDesktop';
-			'Warp.Warp';
+			'JanDeDobbeleer.OhMyPosh';
+			'DEVCOM.JetBrainsMonoNerdFont';
 		);
 		foreach( $app in $apps ) {
 			winget install --id $app --silent --accept-package-agreements --accept-source-agreements;

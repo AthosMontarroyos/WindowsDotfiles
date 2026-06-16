@@ -1,0 +1,109 @@
+# =========================
+# STARSHIP — DEEP VIOLET
+# =========================
+
+add_newline = false
+
+format = """
+$username\
+$cmd_duration\
+$directory\
+$git_branch\
+$character"""
+
+# =========================
+# CHARACTER
+# =========================
+
+[character]
+success_symbol = "[](bold fg:#6863F2)"
+error_symbol = "[](bold fg:#FF4D6D)"
+
+# =========================
+# USERNAME
+# =========================
+
+[username]
+show_always = true
+
+style_user = "bg:#150259 fg:#EAEAFF bold"
+style_root = "bg:#020126 fg:#FFFFFF bold"
+
+format = "[](fg:#150259)[$user]($style)[](fg:#150259) "
+
+# =========================
+# CMD DURATION
+# =========================
+
+[cmd_duration]
+min_time = 0
+
+format = "[](fg:#4630D9)[󰪢 $duration](bg:#4630D9 fg:#EAEAFF bold)[](fg:#4630D9) "
+
+# =========================
+# DIRECTORY
+# =========================
+
+[directory]
+home_symbol = "~"
+read_only = "  "
+
+style = "bg:#0A0140 fg:#CFCFFF"
+
+truncation_length = 3
+truncation_symbol = "../"
+
+format = "[](fg:#0A0140)[󰉋 $path]($style)[](fg:#0A0140) "
+
+[directory.substitutions]
+"Desktop" = ""
+"Documents" = "󰈙"
+"Downloads" = ""
+"Music" = "󰝚"
+"Pictures" = ""
+"Videos" = "󰕧"
+"GitHub" = ""
+
+# =========================
+# GIT BRANCH
+# =========================
+
+[git_branch]
+symbol = " "
+
+truncation_length = 12
+truncation_symbol = ""
+
+style = "bg:#6863F2 fg:#020126 bold"
+
+format = "[](fg:#6863F2)[$symbol$branch]($style)[](fg:#6863F2)"
+
+# =========================
+# GIT STATUS
+# =========================
+
+[git_status]
+conflicted = "⚠"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+untracked = "?"
+stashed = "≡"
+modified = "●"
+staged = "[++](fg:#6863F2)"
+renamed = "➜"
+deleted = "✘"
+
+# =========================
+# PACKAGE
+# =========================
+
+[package]
+disabled = true
+
+# =========================
+# LINE BREAK
+# =========================
+
+[line_break]
+disabled = true

@@ -12,6 +12,7 @@ git
 bash-completion
 zoxide
 direnv
+fish
 
 # =========================================================
 # CLI / FERRAMENTAS

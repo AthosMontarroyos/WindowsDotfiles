@@ -21,6 +21,7 @@ fi
 source "$SCRIPT_DIR/setup-initial.sh"
 source "$SCRIPT_DIR/install-packages.sh"
 source "$SCRIPT_DIR/apply-configs.sh"
+source "$SCRIPT_DIR/setup-fish.sh"
 source "$SCRIPT_DIR/services.sh"
 
 run_install_module() {
@@ -33,10 +34,13 @@ run_install_module() {
     install_official_packages
     install_aur_packages
 
-    # 3.
+    # 3. configuracoes pessoais
     apply_dots
 
-    # 4. Servicos
+    # 4. Fish
+    setup_fish
+
+    # 5. Servicos
     enable_services
 
     log "Modulo de instalacao concluido."
