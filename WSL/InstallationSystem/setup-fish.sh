@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# corrigir CRLF
+sed -i 's/\r//' "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"/../lib/utils.sh
+find "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" -name "*.sh" -exec sed -i 's/\r//' {} +
+
 # ============================================================
 #  SETUP FISH — seta fish como shell padrão
 #  Pode ser sourced ou executado diretamente

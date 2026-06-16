@@ -628,7 +628,6 @@ $scripts = @(
             'Bitwarden.Bitwarden';
             'Mozilla.Thunderbird';
             'Microsoft.PowerToys';
-			'Docker.DockerDesktop';
 			'JanDeDobbeleer.OhMyPosh';
 			'DEVCOM.JetBrainsMonoNerdFont';
 		);

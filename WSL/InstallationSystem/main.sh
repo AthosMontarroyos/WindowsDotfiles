@@ -4,10 +4,8 @@
 sed -i 's/\r//' "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"/../lib/utils.sh
 find "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" -name "*.sh" -exec sed -i 's/\r//' {} +
 
-# ... resto do script
 # ============================================================
-#  INSTALL MODULE — orquestrador principal
-#  Pode ser sourced ou executado diretamente
+#  INSTALL MODULE
 # ============================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

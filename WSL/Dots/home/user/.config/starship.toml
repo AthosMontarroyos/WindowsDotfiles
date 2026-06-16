@@ -1,109 +1,324 @@
 # =========================
-# STARSHIP — DEEP VIOLET
+# STARSHIP — MONOCHROME MINIMAL
 # =========================
 
-add_newline = false
+"$schema" = 'https://starship.rs/config-schema.json'
 
-format = """
+add_newline = true
+continuation_prompt = "[▸▹ ](fg:#666666)"
+
+format = """($nix_shell$container$fill$git_metrics\n)$cmd_duration\
+$hostname\
+$localip\
+$shlvl\
+$shell\
+$env_var\
+$jobs\
+$sudo\
 $username\
-$cmd_duration\
+$character"""
+
+right_format = """
 $directory\
 $git_branch\
-$character"""
+$git_status\
+$package\
+$nodejs\
+$python\
+$rust\
+$golang\
+$docker_context\
+$memory_usage\
+$time"""
+
+# =========================
+# GLOBAL
+# =========================
+
+[fill]
+symbol = " "
 
 # =========================
 # CHARACTER
 # =========================
 
 [character]
-success_symbol = "[](bold fg:#6863F2)"
-error_symbol = "[](bold fg:#FF4D6D)"
+format = "$symbol "
+success_symbol = "[❯](bold fg:#E5E5E5)"
+error_symbol = "[❯](fg:#777777)"
+vimcmd_symbol = "[󰘳](fg:#BFBFBF)"
+vimcmd_replace_one_symbol = "󰛔"
+vimcmd_replace_symbol = "󰛔"
+vimcmd_visual_symbol = "󰈈"
 
 # =========================
 # USERNAME
 # =========================
 
 [username]
-show_always = true
-
-style_user = "bg:#150259 fg:#EAEAFF bold"
-style_root = "bg:#020126 fg:#FFFFFF bold"
-
-format = "[](fg:#150259)[$user]($style)[](fg:#150259) "
-
-# =========================
-# CMD DURATION
-# =========================
-
-[cmd_duration]
-min_time = 0
-
-format = "[](fg:#4630D9)[󰪢 $duration](bg:#4630D9 fg:#EAEAFF bold)[](fg:#4630D9) "
+style_user = "bold fg:#F2F2F2"
+style_root = "bold fg:#FFFFFF"
+format = "[󰀄 $user]($style) "
+disabled = false
+show_always = false
 
 # =========================
 # DIRECTORY
 # =========================
 
 [directory]
-home_symbol = "~"
-read_only = "  "
+home_symbol = "󰋜"
+truncation_length = 2
+truncation_symbol = "󰇘 "
+read_only = " 󰌾"
+use_os_path_sep = true
 
-style = "bg:#0A0140 fg:#CFCFFF"
+style = "fg:#D0D0D0"
 
-truncation_length = 3
-truncation_symbol = "../"
+format = "[$path]($style)[$read_only]($style)"
 
-format = "[](fg:#0A0140)[󰉋 $path]($style)[](fg:#0A0140) "
+repo_root_style = "bold fg:#F0F0F0"
 
-[directory.substitutions]
-"Desktop" = ""
-"Documents" = "󰈙"
-"Downloads" = ""
-"Music" = "󰝚"
-"Pictures" = ""
-"Videos" = "󰕧"
-"GitHub" = ""
+repo_root_format = """
+[$before_root_path](fg:#888888)\
+[$repo_root]($repo_root_style)\
+[$path]($style)\
+[$read_only]($style) \
+[](fg:#AAAAAA)
+"""
+
+# =========================
+# CMD DURATION
+# =========================
+
+[cmd_duration]
+format = "[◄ $duration ](fg:#8E8E8E)"
+
+# =========================
+# JOBS
+# =========================
+
+[jobs]
+format = "[$symbol$number]($style) "
+style = "fg:#CFCFCF"
+symbol = "[▶](fg:#9F9F9F)"
+
+# =========================
+# LOCAL IP
+# =========================
+
+[localip]
+ssh_only = true
+format = " ◯[$localipv4](bold fg:#B0B0B0)"
+disabled = false
+
+# =========================
+# TIME
+# =========================
+
+[time]
+disabled = false
+format = "[ $time]($style)"
+time_format = "%R"
+utc_time_offset = "local"
+
+style = "fg:#7A7A7A"
+
+# =========================
+# BATTERY
+# =========================
+
+[battery]
+format = "[ $percentage $symbol]($style)"
+
+full_symbol = "█"
+charging_symbol = "↑"
+discharging_symbol = "↓"
+unknown_symbol = "░"
+empty_symbol = "▃"
+
+[[battery.display]]
+threshold = 20
+style = "bold fg:#777777"
+
+[[battery.display]]
+threshold = 60
+style = "fg:#999999"
+
+[[battery.display]]
+threshold = 70
+style = "fg:#BBBBBB"
 
 # =========================
 # GIT BRANCH
 # =========================
 
 [git_branch]
-symbol = " "
+format = " [$symbol$branch(:$remote_branch)]($style)"
 
-truncation_length = 12
-truncation_symbol = ""
+symbol = " "
 
-style = "bg:#6863F2 fg:#020126 bold"
+style = "fg:#D8D8D8"
 
-format = "[](fg:#6863F2)[$symbol$branch]($style)[](fg:#6863F2)"
+truncation_symbol = "⋯"
+truncation_length = 11
+
+ignore_branches = ["main", "master"]
+
+only_attached = true
+
+# =========================
+# GIT METRICS
+# =========================
+
+[git_metrics]
+format = '([▴$added]($added_style))([▿$deleted]($deleted_style))'
+
+added_style = 'fg:#CFCFCF'
+deleted_style = 'fg:#7F7F7F'
+
+ignore_submodules = true
+disabled = false
 
 # =========================
 # GIT STATUS
 # =========================
 
 [git_status]
-conflicted = "⚠"
-ahead = "⇡"
-behind = "⇣"
-diverged = "⇕"
-untracked = "?"
-stashed = "≡"
-modified = "●"
-staged = "[++](fg:#6863F2)"
-renamed = "➜"
-deleted = "✘"
+style = "bold fg:#BFBFBF"
+
+format = """
+([⎪$ahead_behind$staged$modified$untracked$renamed\
+$deleted$conflicted$stashed⎥]($style))
+"""
+
+conflicted = "[󰞇](fg:#909090)"
+ahead = "[󰁝 ${count}](fg:#BDBDBD)"
+behind = "[󰁅 ${count}](fg:#888888)"
+diverged = "[󰹹](fg:#8E8E8E)"
+untracked = "[󰞋](fg:#BDBDBD)"
+stashed = "[󰏗](fg:#D6D6D6)"
+modified = "[󰷈](fg:#C8C8C8)"
+staged = "[󰄬 ${count}](fg:#D0D0D0)"
+renamed = "[󰑕](fg:#B5B5B5)"
+deleted = "[󰆴](fg:#777777)"
+
+# =========================
+# NODE
+# =========================
+
+[nodejs]
+symbol = "󰎙 "
+
+format = " js [$symbol$version]($style)"
+
+version_format = "${raw}"
+
+style = "bold fg:#D6D6D6"
+
+detect_files = ["package-lock.json", "yarn.lock"]
+detect_folders = ["node_modules"]
+detect_extensions = []
+
+# =========================
+# PYTHON
+# =========================
+
+[python]
+symbol = "󰌠 "
+
+format = " py [$symbol$version]($style)"
+
+version_format = "${raw}"
+
+style = "bold fg:#E0E0E0"
+
+# =========================
+# RUST
+# =========================
+
+[rust]
+symbol = "󱘗 "
+
+format = " rs [$symbol$version]($style)"
+
+version_format = "${raw}"
+
+style = "bold fg:#D4D4D4"
+
+# =========================
+# GO
+# =========================
+
+[golang]
+symbol = " "
+
+format = " go [$symbol$version]($style)"
+
+style = "fg:#D2D2D2"
 
 # =========================
 # PACKAGE
 # =========================
 
 [package]
-disabled = true
+symbol = "󰏗 "
+
+format = " pkg [$symbol$version]($style)"
+
+version_format = "${raw}"
+
+style = "fg:#BDBDBD"
 
 # =========================
-# LINE BREAK
+# DOCKER
 # =========================
 
-[line_break]
-disabled = true
+[docker_context]
+symbol = " "
+
+format = " docker [$symbol$context]($style)"
+
+style = "bold fg:#D8D8D8"
+
+only_with_files = true
+
+detect_files = [
+  "Dockerfile",
+  "docker-compose.yml",
+  "docker-compose.yaml",
+  "compose.yml",
+  "compose.yaml"
+]
+
+# =========================
+# MEMORY
+# =========================
+
+[memory_usage]
+disabled = false
+
+symbol = "󰍛 "
+
+format = " mem [$symbol${ram}]($style)"
+
+style = "fg:#AFAFAF"
+
+# =========================
+# NIX SHELL
+# =========================
+
+[nix_shell]
+
+style = "fg:#8E8E8E"
+
+symbol = "󱄅 "
+
+format = """
+[$symbol nix⎪$state⎪]($style) \
+[$name](fg:#CFCFCF)
+"""
+
+impure_msg = "impure"
+pure_msg = "pure"
+unknown_msg = "?"

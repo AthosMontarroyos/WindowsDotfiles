@@ -2,12 +2,12 @@ if status is-interactive
     set fish_greeting
 
     # ============================================================
-    #  FASTFETCH — skipa dentro do editor do Terax e VSCode
+    #  HISTORICO
     # ============================================================
-    if test "$TERM_PROGRAM" != "vscode" && test "$TERAX_EDITOR" != "1"
-        fastfetch
-    end
 
+    set -U fish_history main
+    set -g fish_history_max 100000
+    
     # ============================================================
     #  STARSHIP
     # ============================================================
@@ -18,6 +18,12 @@ if status is-interactive
     # ============================================================
     fish_add_path ~/.npm-global/bin
     fish_add_path ~/.local/bin
+
+    # ============================================================
+    #  ALIASES — system
+    # ============================================================
+
+    alias update='sudo pacman -Syu'
 
     # ============================================================
     #  ALIASES — navegacao
