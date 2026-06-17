@@ -618,11 +618,13 @@ $scripts = @(
 			'Valve.Steam';
 			'Mojang.MinecraftLauncher';
 			'RiotGames.Valorant.BR';
+			'pizzaboxer.Bloxstrap';
 			'Overwolf.CurseForge';
 			'TwintailTeam.TTL';
 			'Figma.Figma';
 			'RARLAB.WinRAR';
 			'9WZDNCRFJ3PS';
+			'9n99rclgxk7m';
 			'Google.GoogleDrive';
             'ente-io.auth-desktop';
             'ente-io.photos-desktop';
