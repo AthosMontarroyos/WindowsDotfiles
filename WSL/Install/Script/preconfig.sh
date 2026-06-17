@@ -1,4 +1,7 @@
 #!/bin/bash
+
+sed -i 's/\r//' "$0"
+
 set -e
 
 # =========================================================
@@ -36,5 +39,8 @@ setup_pacman
 
 echo ""
 echo "==> Feito. Usuario '$USERNAME' criado com sudo via wheel."
-echo "==> Reinicie o WSL e defina o usuario padrao com:"
-echo "    wsl.exe -d <sua-distro> --set-default-user $USERNAME"
+echo "==> Reinicie o WSL para aplicar o usuario padrao."
+
+# Definir usuario padrao via wsl.conf
+echo "[user]" >> /etc/wsl.conf
+echo "default=$USERNAME" >> /etc/wsl.conf
