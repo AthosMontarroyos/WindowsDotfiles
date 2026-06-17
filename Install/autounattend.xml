@@ -606,6 +606,7 @@ $scripts = @(
 			'Git.Git';
 			'GitHub.GitHubDesktop';
 			'GitHub.cli';
+			'GitHub.GitLFS';
 			'OBSProject.OBSStudio';
 			'Spotify.Spotify';
 			'9NKSQGP7F2NH';
