@@ -5,7 +5,7 @@ sed -i 's/\r//' "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"/../lib/utils.sh
 find "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" -name "*.sh" -exec sed -i 's/\r//' {} +
 
 # ============================================================
-#  APLICAR CONFIGURACOES — WSL (wsl.conf, git, gh, dots)
+#  APLICAR CONFIGURACOES — WSL (git, gh, dots)
 # ============================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -17,33 +17,6 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 fi
 
 # ----------------------------------------------------------
-# WSL.CONF
-# ----------------------------------------------------------
-apply_wsl_conf() {
-    log "Configurando wsl.conf..."
-
-    local wsl_conf="/etc/wsl.conf"
-
-    if [[ -f "$wsl_conf" ]]; then
-        warn "wsl.conf ja existe — pulando. Edite manualmente se necessario."
-        return
-    fi
-
-    sudo tee "$wsl_conf" > /dev/null <<EOF
-[boot]
-systemd=true
-
-[user]
-default=$USER
-
-[interop]
-appendWindowsPath=false
-EOF
-
-    log "wsl.conf criado. Reinicie o WSL para aplicar: wsl --shutdown"
-}
-
-# ----------------------------------------------------------
 # GIT + GITHUB + SSH
 # ----------------------------------------------------------
 apply_git_config() {
@@ -51,8 +24,8 @@ apply_git_config() {
     local ssh_dir="$HOME/.ssh"
     local key_file="$ssh_dir/id_ed25519"
 
-    current_name="$(git config --global user.name 2>/dev/null)"
-    current_email="$(git config --global user.email 2>/dev/null)"
+    current_name="$(git config --global user.name 2>/dev/null || true)"
+    current_email="$(git config --global user.email 2>/dev/null || true)"
 
     if [[ -z "$current_name" || -z "$current_email" ]]; then
         log "Configurando Git..."
@@ -105,13 +78,13 @@ apply_git_config() {
         warn "Chave SSH ja existe."
     fi
 
-    cat > "$ssh_dir/config" <<EOF
+    cat > "$ssh_dir/config" <<SSHEOF
 Host github.com
     HostName github.com
     User git
     IdentityFile $key_file
     IdentitiesOnly yes
-EOF
+SSHEOF
 
     chmod 600 "$ssh_dir/config"
 
@@ -194,7 +167,6 @@ apply_npmrc() {
 # ORQUESTRADOR
 # ----------------------------------------------------------
 apply_dots() {
-    apply_wsl_conf
     apply_git_config
     apply_personal_dots
     apply_npmrc
