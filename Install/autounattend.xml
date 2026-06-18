@@ -603,6 +603,7 @@ $scripts = @(
 			'Microsoft.Windows.Photos';
 			'Microsoft.Paint';
 			'Microsoft.VisualStudioCode';
+			'TheDocumentFoundation.LibreOffice';
 			'Git.Git';
 			'GitHub.GitHubDesktop';
 			'GitHub.cli';
