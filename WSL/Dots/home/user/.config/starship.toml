@@ -1,207 +1,113 @@
-# =========================
-# STARSHIP — MONOCHROME MINIMAL
-# =========================
+"$schema" = "https://starship.rs/config-schema.json"
 
-"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = false
 
-add_newline = true
-continuation_prompt = "[▸▹ ](fg:#666666)"
-
-format = """($nix_shell$container$fill$git_metrics\n)$cmd_duration\
-$hostname\
-$localip\
-$shlvl\
-$shell\
-$env_var\
+format = """
+$cmd_duration\
 $jobs\
 $sudo\
-$username\
-$character"""
+$character
+"""
 
 right_format = """
 $directory\
 $git_branch\
 $git_status\
-$package\
 $nodejs\
 $python\
 $rust\
 $golang\
 $docker_context\
-$memory_usage\
-$time"""
-
-# =========================
-# GLOBAL
-# =========================
-
-[fill]
-symbol = " "
+$package\
+$time
+"""
 
 # =========================
 # CHARACTER
 # =========================
 
 [character]
-format = "$symbol "
-success_symbol = "[❯](bold fg:#E5E5E5)"
-error_symbol = "[❯](fg:#777777)"
-vimcmd_symbol = "[󰘳](fg:#BFBFBF)"
-vimcmd_replace_one_symbol = "󰛔"
-vimcmd_replace_symbol = "󰛔"
-vimcmd_visual_symbol = "󰈈"
-
-# =========================
-# USERNAME
-# =========================
-
-[username]
-style_user = "bold fg:#F2F2F2"
-style_root = "bold fg:#FFFFFF"
-format = "[󰀄 $user]($style) "
-disabled = false
-show_always = false
-
-# =========================
-# DIRECTORY
-# =========================
-
-[directory]
-home_symbol = "󰋜"
-truncation_length = 2
-truncation_symbol = "󰇘 "
-read_only = " 󰌾"
-use_os_path_sep = true
-
-style = "fg:#D0D0D0"
-
-format = "[$path]($style)[$read_only]($style)"
-
-repo_root_style = "bold fg:#F0F0F0"
-
-repo_root_format = """
-[$before_root_path](fg:#888888)\
-[$repo_root]($repo_root_style)\
-[$path]($style)\
-[$read_only]($style) \
-[](fg:#AAAAAA)
-"""
+success_symbol = "[❯](bold fg:#EAEAEA)"
+error_symbol = "[❯](bold fg:#7F7F7F)"
 
 # =========================
 # CMD DURATION
 # =========================
 
 [cmd_duration]
-format = "[◄ $duration ](fg:#8E8E8E)"
+min_time = 500
+format = "[◄ $duration](fg:#7A7A7A) "
 
 # =========================
 # JOBS
 # =========================
 
 [jobs]
+symbol = "⚙ "
+style = "fg:#BDBDBD"
 format = "[$symbol$number]($style) "
-style = "fg:#CFCFCF"
-symbol = "[▶](fg:#9F9F9F)"
 
 # =========================
-# LOCAL IP
+# SUDO
 # =========================
 
-[localip]
-ssh_only = true
-format = " ◯[$localipv4](bold fg:#B0B0B0)"
+[sudo]
 disabled = false
+symbol = "󰌾 "
+style = "fg:#BDBDBD"
+format = "[$symbol]($style)"
 
 # =========================
-# TIME
+# DIRECTORY
 # =========================
 
-[time]
-disabled = false
-format = "[ $time]($style)"
-time_format = "%R"
-utc_time_offset = "local"
+[directory]
+home_symbol = "~"
+truncation_length = 3
+truncation_symbol = "../"
+style = "fg:#D6D6D6"
 
-style = "fg:#7A7A7A"
+format = "[󰉋 $path]($style) "
 
-# =========================
-# BATTERY
-# =========================
-
-[battery]
-format = "[ $percentage $symbol]($style)"
-
-full_symbol = "█"
-charging_symbol = "↑"
-discharging_symbol = "↓"
-unknown_symbol = "░"
-empty_symbol = "▃"
-
-[[battery.display]]
-threshold = 20
-style = "bold fg:#777777"
-
-[[battery.display]]
-threshold = 60
-style = "fg:#999999"
-
-[[battery.display]]
-threshold = 70
-style = "fg:#BBBBBB"
+[directory.substitutions]
+"Documents" = "󰈙"
+"Downloads" = ""
+"Pictures" = ""
+"Desktop" = ""
+"GitHub" = ""
 
 # =========================
 # GIT BRANCH
 # =========================
 
 [git_branch]
-format = " [$symbol$branch(:$remote_branch)]($style)"
-
 symbol = " "
+style = "fg:#E0E0E0"
 
-style = "fg:#D8D8D8"
+format = "[$symbol$branch]($style) "
 
-truncation_symbol = "⋯"
-truncation_length = 11
-
-ignore_branches = ["main", "master"]
-
-only_attached = true
-
-# =========================
-# GIT METRICS
-# =========================
-
-[git_metrics]
-format = '([▴$added]($added_style))([▿$deleted]($deleted_style))'
-
-added_style = 'fg:#CFCFCF'
-deleted_style = 'fg:#7F7F7F'
-
-ignore_submodules = true
-disabled = false
+truncation_length = 20
+truncation_symbol = "…"
 
 # =========================
 # GIT STATUS
 # =========================
 
 [git_status]
-style = "bold fg:#BFBFBF"
+style = "fg:#AFAFAF"
 
-format = """
-([⎪$ahead_behind$staged$modified$untracked$renamed\
-$deleted$conflicted$stashed⎥]($style))
-"""
+format = "[$all_status$ahead_behind]($style)"
 
-conflicted = "[󰞇](fg:#909090)"
-ahead = "[󰁝 ${count}](fg:#BDBDBD)"
-behind = "[󰁅 ${count}](fg:#888888)"
-diverged = "[󰹹](fg:#8E8E8E)"
-untracked = "[󰞋](fg:#BDBDBD)"
-stashed = "[󰏗](fg:#D6D6D6)"
-modified = "[󰷈](fg:#C8C8C8)"
-staged = "[󰄬 ${count}](fg:#D0D0D0)"
-renamed = "[󰑕](fg:#B5B5B5)"
-deleted = "[󰆴](fg:#777777)"
+ahead = "󰁝 "
+behind = "󰁅 "
+diverged = "󰹹 "
+untracked = "󰞋 "
+modified = "󰷈 "
+staged = "󰄬 "
+renamed = "󰑕 "
+deleted = "󰆴 "
+stashed = "󰏗 "
+conflicted = "󰞇 "
 
 # =========================
 # NODE
@@ -209,16 +115,11 @@ deleted = "[󰆴](fg:#777777)"
 
 [nodejs]
 symbol = "󰎙 "
+style = "fg:#D8D8D8"
 
-format = " js [$symbol$version]($style)"
+format = "[$symbol$version]($style) "
 
 version_format = "${raw}"
-
-style = "bold fg:#D6D6D6"
-
-detect_files = ["package-lock.json", "yarn.lock"]
-detect_folders = ["node_modules"]
-detect_extensions = []
 
 # =========================
 # PYTHON
@@ -226,12 +127,11 @@ detect_extensions = []
 
 [python]
 symbol = "󰌠 "
+style = "fg:#D8D8D8"
 
-format = " py [$symbol$version]($style)"
+format = "[$symbol$version]($style) "
 
 version_format = "${raw}"
-
-style = "bold fg:#E0E0E0"
 
 # =========================
 # RUST
@@ -239,12 +139,11 @@ style = "bold fg:#E0E0E0"
 
 [rust]
 symbol = "󱘗 "
+style = "fg:#D8D8D8"
 
-format = " rs [$symbol$version]($style)"
+format = "[$symbol$version]($style) "
 
 version_format = "${raw}"
-
-style = "bold fg:#D4D4D4"
 
 # =========================
 # GO
@@ -252,23 +151,9 @@ style = "bold fg:#D4D4D4"
 
 [golang]
 symbol = " "
+style = "fg:#D8D8D8"
 
-format = " go [$symbol$version]($style)"
-
-style = "fg:#D2D2D2"
-
-# =========================
-# PACKAGE
-# =========================
-
-[package]
-symbol = "󰏗 "
-
-format = " pkg [$symbol$version]($style)"
-
-version_format = "${raw}"
-
-style = "fg:#BDBDBD"
+format = "[$symbol$version]($style) "
 
 # =========================
 # DOCKER
@@ -276,49 +161,31 @@ style = "fg:#BDBDBD"
 
 [docker_context]
 symbol = " "
+style = "fg:#D8D8D8"
 
-format = " docker [$symbol$context]($style)"
-
-style = "bold fg:#D8D8D8"
+format = "[$symbol$context]($style) "
 
 only_with_files = true
 
-detect_files = [
-  "Dockerfile",
-  "docker-compose.yml",
-  "docker-compose.yaml",
-  "compose.yml",
-  "compose.yaml"
-]
-
 # =========================
-# MEMORY
+# PACKAGE
 # =========================
 
-[memory_usage]
+[package]
+symbol = "󰏗 "
+style = "fg:#C0C0C0"
+
+format = "[$symbol$version]($style) "
+
+# =========================
+# TIME
+# =========================
+
+[time]
 disabled = false
 
-symbol = "󰍛 "
+time_format = "%H:%M"
 
-format = " mem [$symbol${ram}]($style)"
+style = "fg:#7A7A7A"
 
-style = "fg:#AFAFAF"
-
-# =========================
-# NIX SHELL
-# =========================
-
-[nix_shell]
-
-style = "fg:#8E8E8E"
-
-symbol = "󱄅 "
-
-format = """
-[$symbol nix⎪$state⎪]($style) \
-[$name](fg:#CFCFCF)
-"""
-
-impure_msg = "impure"
-pure_msg = "pure"
-unknown_msg = "?"
+format = "[$time]($style)"
