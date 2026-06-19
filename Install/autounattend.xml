@@ -634,6 +634,7 @@ $scripts = @(
             'Microsoft.PowerToys';
 			'JanDeDobbeleer.OhMyPosh';
 			'DEVCOM.JetBrainsMonoNerdFont';
+			'Pencil.Desktop';
 		);
 		foreach( $app in $apps ) {
 			winget install --id $app --silent --accept-package-agreements --accept-source-agreements;
