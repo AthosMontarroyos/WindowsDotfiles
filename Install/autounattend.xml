@@ -603,7 +603,6 @@ $scripts = @(
 			'Microsoft.Windows.Photos';
 			'Microsoft.Paint';
 			'Microsoft.VisualStudioCode';
-			'TheDocumentFoundation.LibreOffice';
 			'Git.Git';
 			'GitHub.GitHubDesktop';
 			'GitHub.cli';
@@ -630,11 +629,12 @@ $scripts = @(
             'ente-io.auth-desktop';
             'ente-io.photos-desktop';
             'Bitwarden.Bitwarden';
-            'Mozilla.Thunderbird';
             'Microsoft.PowerToys';
 			'JanDeDobbeleer.OhMyPosh';
 			'DEVCOM.JetBrainsMonoNerdFont';
-			'Pencil.Desktop';
+			'Google.Chrome';
+			'Google.Antigravity';
+			'Google.AntigravityIDE';
 		);
 		foreach( $app in $apps ) {
 			winget install --id $app --silent --accept-package-agreements --accept-source-agreements;
