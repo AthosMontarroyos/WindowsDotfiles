@@ -597,7 +597,6 @@ $scripts = @(
 	{
 		$apps = @(
 			'Mozilla.Firefox';
-			'TorProject.TorBrowser';
 			'Microsoft.WindowsCalculator';
 			'Microsoft.ZuneMusic';
 			'Microsoft.Windows.Photos';
