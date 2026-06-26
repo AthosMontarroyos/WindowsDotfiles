@@ -45,7 +45,7 @@ sed -i 's/\r//' preconfig.sh && bash preconfig.sh
 Copy the `WSL` directory to your home folder and execute:
 
 ```bash
-sed -i 's/\r//' ~/WindowsRice/WSL/Config/main.sh && bash ~/WindowsRice/WSL/Config/main.sh
+sed -i 's/\r//' ~/WindowsDotfiles/WSL/Config/main.sh && bash ~/WindowsDotfiles/WSL/Config/main.sh
 ```
 
 This script will apply the complete WSL configuration.
