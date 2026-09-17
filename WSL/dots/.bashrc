@@ -1,5 +1,5 @@
 # ============================================================
-#  .bashrc — WSL + Warp
+#  .bashrc — ArchWSL
 # ============================================================
 
 # Nao rodar em sessoes nao-interativas
@@ -9,8 +9,11 @@
 #  PATH
 # ============================================================
 
-export PATH="$HOME/.npm-global/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+case ":$PATH:" in
+    *":$HOME/.local/bin:"*) ;;
+    *) export PATH="$HOME/.local/bin:$PATH" ;;
+esac
+export EDITOR=nvim
 
 # ============================================================
 #  ALIASES — navegacao
@@ -31,7 +34,8 @@ alias pamcan='sudo pacman'
 
 alias dc='docker compose'
 alias lzd='lazydocker'
-alias cx='codex'
+alias oc='opencode'
+alias ff='fastfetch'
 
 alias g='git'
 alias gs='git status'
@@ -45,28 +49,26 @@ alias gl='git log --oneline --graph --decorate'
 # ============================================================
 
 pg-start() {
-    sudo systemctl start postgresql
-    echo "PostgreSQL rodando."
+    sudo systemctl start postgresql && echo "PostgreSQL rodando."
 }
 
 pg-stop() {
-    sudo systemctl stop postgresql
-    echo "PostgreSQL parado."
+    sudo systemctl stop postgresql && echo "PostgreSQL parado."
 }
 
 dk-start() {
-    sudo systemctl start docker
-    echo "Docker rodando."
+    sudo systemctl start docker && echo "Docker rodando."
 }
 
 # ============================================================
 #  ZOXIDE
 # ============================================================
 
-eval "$(zoxide init bash)"
+command -v zoxide >/dev/null && eval "$(zoxide init bash)"
 
 # ============================================================
 #  DIRENV
 # ============================================================
 
-eval "$(direnv hook bash)"
+command -v direnv >/dev/null && eval "$(direnv hook bash)"
+command -v starship >/dev/null && eval "$(starship init bash)"

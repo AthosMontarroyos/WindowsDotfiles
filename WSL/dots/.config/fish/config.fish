@@ -1,3 +1,6 @@
+fish_add_path ~/.local/bin
+set -gx EDITOR nvim
+
 if status is-interactive
     set fish_greeting
 
@@ -5,19 +8,14 @@ if status is-interactive
     #  HISTORICO
     # ============================================================
 
-    set -U fish_history main
-    set -g fish_history_max 100000
+    set -g fish_history main
     
     # ============================================================
     #  STARSHIP
     # ============================================================
-    starship init fish | source
-
-    # ============================================================
-    #  PATH
-    # ============================================================
-    fish_add_path ~/.npm-global/bin
-    fish_add_path ~/.local/bin
+    if type -q starship
+        starship init fish | source
+    end
 
     # ============================================================
     #  ALIASES — system
@@ -42,7 +40,8 @@ if status is-interactive
     # ============================================================
     alias dc='docker compose'
     alias lzd='lazydocker'
-    alias cx='codex'
+    alias oc='opencode'
+    alias ff='fastfetch'
 
     alias g='git'
     alias gs='git status'
@@ -54,28 +53,29 @@ if status is-interactive
     # ============================================================
     #  ZOXIDE
     # ============================================================
-    zoxide init fish | source
+    if type -q zoxide
+        zoxide init fish | source
+    end
 
     # ============================================================
     #  DIRENV
     # ============================================================
-    direnv hook fish | source
+    if type -q direnv
+        direnv hook fish | source
+    end
 
     # ============================================================
     #  FUNCOES — servicos
     # ============================================================
     function pg-start
-        sudo systemctl start postgresql
-        echo "PostgreSQL rodando."
+        sudo systemctl start postgresql; and echo "PostgreSQL rodando."
     end
 
     function pg-stop
-        sudo systemctl stop postgresql
-        echo "PostgreSQL parado."
+        sudo systemctl stop postgresql; and echo "PostgreSQL parado."
     end
 
     function dk-start
-        sudo systemctl start docker
-        echo "Docker rodando."
+        sudo systemctl start docker; and echo "Docker rodando."
     end
 end

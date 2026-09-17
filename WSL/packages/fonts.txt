@@ -1,0 +1,5 @@
+# Somente para apps Linux/WSLg. O terminal Windows usa as fontes do Windows.
+ttf-meslo-nerd
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji

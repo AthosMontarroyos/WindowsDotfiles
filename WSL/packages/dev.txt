@@ -1,0 +1,12 @@
+# Desenvolvimento habitual; toolchains extras sao selecionadas separadamente.
+base-devel
+git-lfs
+git-filter-repo
+gitleaks
+go-yq
+nodejs
+npm
+pnpm
+python
+uv
+sqlite

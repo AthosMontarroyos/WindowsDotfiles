@@ -1,0 +1,2 @@
+# Instala o servidor; nao inicializa, altera ou inicia bancos automaticamente.
+postgresql

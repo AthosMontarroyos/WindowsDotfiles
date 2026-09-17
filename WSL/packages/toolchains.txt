@@ -1,0 +1,21 @@
+# Opcional: todos os ecossistemas especializados do setup anterior.
+base-devel
+cmake
+ninja
+clang
+gdb
+valgrind
+dotnet-sdk
+jdk-openjdk
+kotlin
+ruby
+php
+php-fpm
+composer
+go
+rustup
+lua
+luarocks
+zig
+openblas
+hdf5
