@@ -6,10 +6,10 @@
                 <UILanguage>en-US</UILanguage>
             </SetupUILanguage>
             <InputLocale>0409:00000409</InputLocale>
-            <SystemLocale>pt-BR</SystemLocale>
+            <SystemLocale>en-US</SystemLocale>
             <UILanguage>en-US</UILanguage>
             <UILanguageFallback>en-US</UILanguageFallback>
-            <UserLocale>pt-BR</UserLocale>
+            <UserLocale>en-US</UserLocale>
         </component>
         <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
             <UserData>
@@ -60,42 +60,18 @@
     <settings pass="oobeSystem">
         <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
             <InputLocale>0409:00000409</InputLocale>
-            <SystemLocale>pt-BR</SystemLocale>
+            <SystemLocale>en-US</SystemLocale>
             <UILanguage>en-US</UILanguage>
-            <UserLocale>pt-BR</UserLocale>
+            <UserLocale>en-US</UserLocale>
         </component>
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
             <TimeZone>E. South America Standard Time</TimeZone>
-            <UserAccounts>
-                <LocalAccounts>
-                    <LocalAccount wcm:action="add">
-                        <Name>AthosMontarroyos</Name>
-                        <DisplayName></DisplayName>
-                        <Group>Administrators</Group>
-                        <Password>
-                            <Value></Value>
-                            <PlainText>true</PlainText>
-                        </Password>
-                    </LocalAccount>
-                </LocalAccounts>
-            </UserAccounts>
-            <AutoLogon>
-                <Username>AthosMontarroyos</Username>
-                <Enabled>true</Enabled>
-                <LogonCount>1</LogonCount>
-                <Password>
-                    <Value>43546576</Value>
-                    <PlainText>true</PlainText>
-                </Password>
-            </AutoLogon>
             <OOBE>
                 <HideEULAPage>true</HideEULAPage>
                 <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
                 <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
                 <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
                 <NetworkLocation>Work</NetworkLocation>
-                <SkipUserOOBE>true</SkipUserOOBE>
-                <SkipMachineOOBE>true</SkipMachineOOBE>
                 <ProtectYourPC>1</ProtectYourPC>
             </OOBE>
             <FirstLogonCommands>
@@ -597,6 +573,8 @@ $scripts = @(
 	{
 		$apps = @(
 			'Mozilla.Firefox';
+			'Zen-Team.Zen-Browser';
+			'Google.Chrome';
 			'Microsoft.WindowsCalculator';
 			'Microsoft.ZuneMusic';
 			'Microsoft.Windows.Photos';
@@ -613,7 +591,6 @@ $scripts = @(
 			'Obsidian.Obsidian';
 			'Vencord.Vesktop';
 			'Telegram.TelegramDesktop';
-			'Anthropic.Claude';
 			'Valve.Steam';
 			'pizzaboxer.Bloxstrap';
 			'RiotGames.Valorant.BR';
@@ -628,18 +605,17 @@ $scripts = @(
             'Microsoft.PowerToys';
 			'JanDeDobbeleer.OhMyPosh';
 			'DEVCOM.JetBrainsMonoNerdFont';
-			'Google.AntigravityIDE';
-			'9NT1R1C2HH7J';
-			'OpenAI.Codex';
 			'OpenJS.NodeJS';
-			'python3';
+			'Python.Python.3.14';
 			'Tailscale.Tailscale';
 			'Cloudflare.cloudflared';
-			'Zen-Team.Zen-Browser';
-			'Google.Chrome';
+			'MullvadVPN.MullvadVPN';
 		);
 		foreach( $app in $apps ) {
-			winget install --id $app --silent --accept-package-agreements --accept-source-agreements;
+			winget install --id $app --exact --silent --accept-package-agreements --accept-source-agreements;
+			if( $LASTEXITCODE -ne 0 ) {
+				Write-Warning "WinGet returned $LASTEXITCODE for $app. Check the log and retry manually.";
+			}
 		}
 	};
 );
@@ -738,9 +714,6 @@ $scripts = @(
 		</File>
         <File path="C:\Windows\Setup\Scripts\FirstLogon.ps1">
 $scripts = @(
-	{
-		Set-ItemProperty -LiteralPath 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name 'AutoLogonCount' -Type 'DWord' -Force -Value 0;
-	};
 	{
 		Remove-Item -LiteralPath @(
 		  'C:\Windows\Panther\unattend.xml';
