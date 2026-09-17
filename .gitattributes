@@ -1,3 +1,13 @@
-# Auto detect text files and perform LF normalization
 * text=auto
+.gitattributes text eol=lf
+**/.bashrc text eol=lf
+*.awk text eol=lf
+*.sh text eol=lf
+*.fish text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+*.md text eol=lf
+*.jsonc text eol=lf
+*.ps1 text eol=crlf
+*.xml text eol=crlf
 
