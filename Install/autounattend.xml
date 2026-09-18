@@ -572,7 +572,6 @@ $scripts = @(
 	};
 	{
 		$apps = @(
-			'Mozilla.Firefox';
 			'Zen-Team.Zen-Browser';
 			'Google.Chrome';
 			'Microsoft.WindowsCalculator';
