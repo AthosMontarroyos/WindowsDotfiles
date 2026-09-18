@@ -35,14 +35,21 @@ apply_dotfiles() {
 
 setup_fish() {
     local fish_path current_shell
+
     if (( DRY_RUN )); then
         log '[dry-run] Definir Fish como shell de login, se necessario.'
         return
     fi
+
     fish_path="$(command -v fish)" || die 'Fish nao encontrado.'
+    fish_path="$(readlink -f "$fish_path")"
+
     current_shell="$(getent passwd "$(id -un)" | cut -d: -f7)"
+
     if [[ "$current_shell" != "$fish_path" ]]; then
-        grep -Fxq "$fish_path" /etc/shells || die 'Fish ausente de /etc/shells; confira o pacote.'
+        grep -Fxq "$fish_path" /etc/shells \
+            || die "Fish ($fish_path) ausente de /etc/shells."
+
         chsh -s "$fish_path"
         log 'Reabra a sessao para usar Fish.'
     fi
