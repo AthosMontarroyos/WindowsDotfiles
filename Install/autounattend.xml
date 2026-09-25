@@ -579,6 +579,7 @@ $scripts = @(
 			'Microsoft.Windows.Photos';
 			'Microsoft.Paint';
 			'Microsoft.VisualStudioCode';
+			'Anysphere.Cursor';	
 			'Git.Git';
 			'GitHub.GitHubDesktop';
 			'GitHub.cli';

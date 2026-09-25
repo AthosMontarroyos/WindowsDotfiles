@@ -20,6 +20,7 @@ fi
 if command -v fish >/dev/null; then
     fish --no-execute "$WSL_DIR/dots/.config/fish/config.fish"
     fish --no-execute "$WSL_DIR/dots/.config/fish/functions/ff-random.fish"
+    fish --no-execute "$WSL_DIR/dots/.config/fish/functions/ocimg.fish"
 else
     warn 'Fish indisponivel; sintaxe Fish nao executada.'
 fi

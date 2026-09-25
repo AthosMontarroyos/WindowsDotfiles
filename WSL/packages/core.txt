@@ -27,5 +27,7 @@ unzip
 zip
 7zip
 neovim
+fuse3
+wget
 fastfetch
 opencode
