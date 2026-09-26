@@ -584,6 +584,8 @@ $scripts = @(
 			'GitHub.GitHubDesktop';
 			'GitHub.cli';
 			'GitHub.GitLFS';
+			'9PLM9XGG6VKS';
+			'OpenAI.Codex';
 			'OBSProject.OBSStudio';
 			'Spotify.Spotify';
 			'9NKSQGP7F2NH';
